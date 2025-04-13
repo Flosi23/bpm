@@ -7,7 +7,6 @@ export default {
   future: {
     unstable_middleware: true,
   },
-  appDirectory: "app/frontend"
 } satisfies Config;
 
 declare module "react-router" {

@@ -1,7 +1,7 @@
-import tailwindcss from "tailwindcss?url";
 import type { PropsWithChildren } from "react";
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import type { Route } from "./+types/root";
+import tailwindcss from "./tailwind.css?url";
 
 export const links: Route.LinksFunction = () => [{ rel: "stylesheet", href: tailwindcss }];
 
