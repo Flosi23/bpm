@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!**/app/tailwind.css", "!**/.react-router", "!**/build/**"]
+    "includes": ["**", "!**/app/tailwind.css", "!**/.react-router", "!**/build/**", "!**/icons/**"]
   },
   "formatter": {
     "enabled": true,
@@ -199,7 +199,7 @@
         "noTsIgnore": "error",
         "noConstantBinaryExpression": "error",
         "noAwaitInLoop": "error",
-        "noBitwiseOperators": "error",
+        "noBitwiseOperators": "off",
         "noCommonJs": "error",
         "noDescendingSpecificity": "error",
         "noDestructuredProps": "off",
@@ -274,7 +274,7 @@
           "level": "error"
         },
         "noApproximativeNumericConstant": "error",
-        "noArrayIndexKey": "error",
+        "noArrayIndexKey": "off",
         "noAssignInExpressions": "error",
         "noAsyncPromiseExecutor": "error",
         "noCatchAssign": "error",

@@ -1,7 +1,7 @@
 import { type } from "arktype";
 import { useLoaderData } from "react-router";
-import type { Route } from "./+types/callback";
 import { spotify } from "@/.server/spotify";
+import type { Route } from "./+types/callback";
 
 export const expectedParams = type({
   code: "string",

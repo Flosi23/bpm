@@ -1,8 +1,18 @@
 import { type } from "arktype";
 import { href, redirect } from "react-router";
-import { spotify } from "@/.server/spotify";
 import { env } from "@/lib/env.server";
-import { spotifyTokenResponse, type SpotifyTokenResponse } from "../model/auth";
+import { SpotifyTokenResponse } from "../model/auth";
+
+const SCOPES = [
+  "user-read-playback-state",
+  "user-read-currently-playing",
+  "playlist-read-private",
+  "playlist-read-collaborative",
+  "playlist-modify-private",
+  "playlist-modify-public",
+  "user-library-read",
+  "user-library-modify",
+];
 
 const SPOTIFY_CLIENT_ID = env.get("SPOTIFY_CLIENT_ID");
 const SPOTIFY_CLIENT_SECRET = env.get("SPOTIFY_CLIENT_SECRET");
@@ -16,7 +26,9 @@ function authenticate() {
   searchParams.set("client_id", SPOTIFY_CLIENT_ID);
   searchParams.set("redirect_uri", SPOTIFY_REDIRECT_URL);
   searchParams.set("show_dialog", "true");
-  spotify.SCOPES.forEach((s) => searchParams.append("scope", s));
+  for (const s of SCOPES) {
+    searchParams.append("scope", s);
+  }
   throw redirect(`${SPOTIFY_AUTHORIZATION_ENDPOINT}?${searchParams.toString()}`);
 }
 
@@ -25,7 +37,6 @@ const tokenExpectedParams = type({
 }).or({
   error: "'access_denied' | string",
 });
-
 
 async function requestToken(request: Request): Promise<SpotifyTokenResponse> {
   const url = new URL(request.url);
@@ -46,11 +57,10 @@ async function requestToken(request: Request): Promise<SpotifyTokenResponse> {
     },
   });
 
-  return spotifyTokenResponse.assert(await res.json());
+  return SpotifyTokenResponse.assert(await res.json());
 }
 
 export const auth = {
-  authenticate,
-  requestToken,
+  authenticate: authenticate,
+  requestToken: requestToken,
 };
-

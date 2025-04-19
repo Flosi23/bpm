@@ -8,11 +8,11 @@ export interface SpotifyAccessToken {
   expires?: number;
 }
 
-export const spotifyTokenResponse = type({
+export const SpotifyTokenResponse = type({
   access_token: "string",
   token_type: "string",
   expires_in: "number.integer > 0",
   refresh_token: "string",
 });
 
-export type SpotifyTokenResponse = typeof spotifyTokenResponse.infer;
+export type SpotifyTokenResponse = typeof SpotifyTokenResponse.infer;

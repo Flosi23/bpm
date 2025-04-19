@@ -5,14 +5,15 @@ services:
       target: dev
     ports:
       - "3000:3000"
+      - "3001:3001"
     volumes:
       - ./src/:/app
     environment:
       - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
       - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
       - SPOTIFY_REDIRECT_URL=${SPOTIFY_REDIRECT_URL}
-      - SPOTIFY_AUTHORIZATION_ENDPOINT=${SPOTIFY_AUTHORIZATION_ENDPOINT:https://accounts.spotify.com/authorize}
-      - SPOTIFY_TOKEN_ENDPOINT=${SPOTIFY_TOKEN_ENDPOINT:https://accounts.spotify.com/api/token}
+      - SPOTIFY_AUTHORIZATION_ENDPOINT=${SPOTIFY_AUTHORIZATION_ENDPOINT:-https://accounts.spotify.com/authorize}
+      - SPOTIFY_TOKEN_ENDPOINT=${SPOTIFY_TOKEN_ENDPOINT:-https://accounts.spotify.com/api/token}
   reverse-proxy:
     image: caddy:2-alpine
     ports:
